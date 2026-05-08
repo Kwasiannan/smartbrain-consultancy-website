@@ -2,12 +2,35 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/icons.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>smartbrain-website</title>
+    <meta
+      name="description"
+      content="SmartBrain Academic & Research Consultancy provides academic coaching, research support, project mentoring, editing, data analysis, presentation preparation and international student application support."
+    />
+    <title>SmartBrain Academic & Research Consultancy</title>
   </head>
+
   <body>
+    <form name="smartbrain-booking" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="smartbrain-booking" />
+      <input type="text" name="bot-field" />
+
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="phone" />
+      <input type="text" name="country" />
+      <input type="text" name="service" />
+      <input type="text" name="level" />
+      <input type="text" name="deadline" />
+      <input type="text" name="budget" />
+      <input type="text" name="contactMethod" />
+      <textarea name="message"></textarea>
+      <input type="text" name="consent" />
+    </form>
+
     <div id="root"></div>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

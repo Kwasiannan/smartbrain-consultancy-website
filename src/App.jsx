@@ -772,6 +772,11 @@ const DetailList = ({ title, items, dark = false }) => (
   </div>
 );
 
+const encodeFormData = (data) =>
+  Object.keys(data)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+    .join('&');
+
 export default function SmartBrainPremiumWebsite() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
@@ -781,6 +786,11 @@ export default function SmartBrainPremiumWebsite() {
   const [openPolicy, setOpenPolicy] = useState(null);
   const [openResource, setOpenResource] = useState(null);
   const [openProcess, setOpenProcess] = useState(null);
+
+  const [formStatus, setFormStatus] = useState({
+    type: '',
+    message: '',
+  });
 
   const [formData, setFormData] = useState({
     name: '',
@@ -808,6 +818,85 @@ export default function SmartBrainPremiumWebsite() {
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
+  };
+
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      country: '',
+      service: 'Academic Coaching',
+      level: '',
+      deadline: '',
+      budget: '',
+      contactMethod: 'WhatsApp',
+      message: '',
+      consent: false,
+    });
+  };
+
+  const handleBookingSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!formData.name || !formData.email || !formData.phone || !formData.service) {
+      setFormStatus({
+        type: 'error',
+        message: 'Please complete your name, email, phone number and service needed.',
+      });
+      return;
+    }
+
+    if (!formData.consent) {
+      setFormStatus({
+        type: 'error',
+        message: 'Please confirm the consent statement before submitting your booking.',
+      });
+      return;
+    }
+
+    const submissionData = {
+      'form-name': 'smartbrain-booking',
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      country: formData.country,
+      service: formData.service,
+      level: formData.level,
+      deadline: formData.deadline,
+      budget: formData.budget,
+      contactMethod: formData.contactMethod,
+      message: formData.message,
+      consent: formData.consent ? 'Yes' : 'No',
+    };
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encodeFormData(submissionData),
+      });
+
+      if (response.ok) {
+        setFormStatus({
+          type: 'success',
+          message:
+            'Thank you. Your booking request has been submitted successfully. SmartBrain will contact you shortly.',
+        });
+
+        resetForm();
+      } else {
+        setFormStatus({
+          type: 'error',
+          message: 'The booking could not be submitted. Please use WhatsApp or email.',
+        });
+      }
+    } catch (error) {
+      setFormStatus({
+        type: 'error',
+        message: 'The booking could not be submitted. Please use WhatsApp or email.',
+      });
+    }
   };
 
   const requestSummary = `Hello ${business.name},
@@ -869,9 +958,7 @@ Thank you.`;
             <Button href={`tel:${tel1}`} variant="outline">
               Call Us
             </Button>
-            <Button href="#booking">
-              Book Support
-            </Button>
+            <Button href="#booking">Book Support</Button>
           </div>
 
           <button
@@ -902,9 +989,7 @@ Thank you.`;
                 <Button href={`tel:${tel1}`} variant="outline">
                   Call Us
                 </Button>
-                <Button href="#booking">
-                  Book Support
-                </Button>
+                <Button href="#booking">Book Support</Button>
               </div>
             </div>
           </div>
@@ -1307,9 +1392,8 @@ Thank you.`;
               </h2>
 
               <p className="mt-5 leading-8 text-slate-200">
-                Complete the form and send your request by email or WhatsApp. We will
-                review your request and confirm the next steps, estimated timeframe and
-                pricing.
+                Complete the form and submit your request. You can also use the email or
+                WhatsApp buttons for direct contact.
               </p>
 
               <div className="mt-8 rounded-3xl bg-white/10 p-6 ring-1 ring-white/10">
@@ -1355,12 +1439,28 @@ Thank you.`;
             </FadeIn>
 
             <FadeIn delay={0.1}>
-              <div className="rounded-[2rem] bg-white p-6 text-slate-900 shadow-2xl sm:p-8">
+              <form
+                name="smartbrain-booking"
+                method="POST"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+                onSubmit={handleBookingSubmit}
+                className="rounded-[2rem] bg-white p-6 text-slate-900 shadow-2xl sm:p-8"
+              >
+                <input type="hidden" name="form-name" value="smartbrain-booking" />
+
+                <p className="hidden">
+                  <label>
+                    Do not fill this out if you are human:
+                    <input name="bot-field" />
+                  </label>
+                </p>
+
                 <div className="mb-6 flex items-center justify-between gap-4">
                   <div>
                     <h3 className="text-2xl font-black text-[#061B3A]">Booking Request</h3>
                     <p className="mt-1 text-sm font-semibold text-slate-500">
-                      Fill in the details and send by WhatsApp or email.
+                      Complete the form and submit your request.
                     </p>
                   </div>
                   <LogoMark size="sm" />
@@ -1374,6 +1474,7 @@ Thank you.`;
                       value={formData.name}
                       onChange={handleChange}
                       autoComplete="name"
+                      required
                       className="rounded-2xl border border-slate-200 px-4 py-3 text-slate-900 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-100"
                       placeholder="Your full name"
                     />
@@ -1387,6 +1488,7 @@ Thank you.`;
                       onChange={handleChange}
                       type="email"
                       autoComplete="email"
+                      required
                       className="rounded-2xl border border-slate-200 px-4 py-3 text-slate-900 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-100"
                       placeholder="you@example.com"
                     />
@@ -1399,6 +1501,7 @@ Thank you.`;
                       value={formData.phone}
                       onChange={handleChange}
                       autoComplete="tel"
+                      required
                       className="rounded-2xl border border-slate-200 px-4 py-3 text-slate-900 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-100"
                       placeholder="Your phone number"
                     />
@@ -1422,6 +1525,7 @@ Thank you.`;
                       name="service"
                       value={formData.service}
                       onChange={handleChange}
+                      required
                       className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-100"
                     >
                       {serviceOptions.map((option) => (
@@ -1518,24 +1622,43 @@ Thank you.`;
                   </label>
                 </div>
 
-                <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                  <Button href={mailtoLink} variant="navy">
+                <div className="mt-6 grid gap-3 sm:grid-cols-3">
+                  <button
+                    type="submit"
+                    className="inline-flex items-center justify-center rounded-full bg-[#061B3A] px-6 py-3 text-sm font-black text-white shadow-lg shadow-slate-900/15 transition hover:-translate-y-0.5 hover:bg-[#082B5F]"
+                  >
+                    <Send className="mr-2 h-4 w-4" />
+                    Submit Booking
+                  </button>
+
+                  <Button href={mailtoLink} variant="outline">
                     <Mail className="mr-2 h-4 w-4" />
-                    Send by Email
+                    Email
                   </Button>
 
                   <Button href={whatsappLink} target="_blank">
-                    <Send className="mr-2 h-4 w-4" />
-                    Send by WhatsApp
+                    <MessageCircle className="mr-2 h-4 w-4" />
+                    WhatsApp
                   </Button>
                 </div>
 
+                {formStatus.message && (
+                  <div
+                    className={`mt-4 rounded-2xl p-4 text-sm font-bold ${
+                      formStatus.type === 'success'
+                        ? 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100'
+                        : 'bg-red-50 text-red-700 ring-1 ring-red-100'
+                    }`}
+                  >
+                    {formStatus.message}
+                  </div>
+                )}
+
                 <p className="mt-4 text-xs leading-6 text-slate-500">
-                  This first website version sends requests through email or WhatsApp. It can later
-                  be connected to Netlify Forms, Formspree, Calendly, Stripe or a full client
-                  database.
+                  Your booking request will be stored securely in the administrator’s Netlify
+                  Forms dashboard. You may also use email or WhatsApp for direct contact.
                 </p>
-              </div>
+              </form>
             </FadeIn>
           </div>
         </section>
