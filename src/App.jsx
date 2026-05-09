@@ -839,10 +839,18 @@ export default function SmartBrainPremiumWebsite() {
   const handleBookingSubmit = async (event) => {
     event.preventDefault();
 
-    if (!formData.name || !formData.email || !formData.phone || !formData.service) {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.service ||
+      !formData.level ||
+      !formData.message
+    ) {
       setFormStatus({
         type: 'error',
-        message: 'Please complete your name, email, phone number and service needed.',
+        message:
+          'Please complete your name, email, phone number, service needed, academic level/purpose and message before submitting.',
       });
       return;
     }
@@ -881,7 +889,7 @@ export default function SmartBrainPremiumWebsite() {
         setFormStatus({
           type: 'success',
           message:
-            'Thank you. Your booking request has been submitted successfully. SmartBrain will contact you shortly.',
+            'Thank you. Your booking request has been submitted successfully. SmartBrain has received your enquiry and will contact you shortly by your preferred contact method.',
         });
 
         resetForm();
@@ -1559,6 +1567,7 @@ Thank you.`;
                       name="level"
                       value={formData.level}
                       onChange={handleChange}
+                      required
                       className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-100"
                     >
                       <option value="">Select academic level or purpose</option>
@@ -1603,6 +1612,7 @@ Thank you.`;
                       value={formData.message}
                       onChange={handleChange}
                       rows={5}
+                      required
                       className="rounded-2xl border border-slate-200 px-4 py-3 text-slate-900 outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-100"
                       placeholder="Briefly describe what you need help with."
                     />
