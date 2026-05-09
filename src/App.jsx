@@ -73,6 +73,7 @@ const navLinks = [
   { label: 'Services', href: '#services' },
   { label: 'Packages', href: '#packages' },
   { label: 'Process', href: '#process' },
+  { label: 'Payments', href: '#payments' },
   { label: 'Resources', href: '#resources' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Contact', href: '#contact' },
@@ -401,6 +402,49 @@ const packages = [
       'Application plus document preparation',
       'Longer-term coaching support',
     ],
+  },
+];
+
+const paymentLinks = [
+  {
+    name: 'Starter Review',
+    price: '£25',
+    link: 'https://buy.stripe.com/3cI4gAgub9nseSDbyx4ZG05',
+    description:
+      'For short documents, proofreading, formatting checks, CVs, personal statements, presentation slides and small report sections.',
+    note: 'Best for quick review tasks.',
+  },
+  {
+    name: 'Academic Support Deposit',
+    price: '£60',
+    link: 'https://buy.stripe.com/fZu00k2DldDIfWHfON4ZG04',
+    description:
+      'For assignment structure guidance, coursework improvement advice, referencing support and academic coaching.',
+    note: 'Pay after support scope is agreed.',
+  },
+  {
+    name: 'Application Support',
+    price: '£40',
+    link: 'https://buy.stripe.com/fZu6oI0vdarwaCn7ih4ZG03',
+    description:
+      'For school, college, university or professional programme application support, including personal statement and CV review.',
+    note: 'Best for application preparation.',
+  },
+  {
+    name: 'Custom Support Deposit',
+    price: '£50',
+    link: 'https://buy.stripe.com/6oU28sa5N7fkaCn8ml4ZG02',
+    description:
+      'For custom academic, research, project, data, editing, presentation or application support after consultation.',
+    note: 'Use only after quote confirmation.',
+  },
+  {
+    name: 'Premium Support Deposit',
+    price: '£100',
+    link: 'https://buy.stripe.com/8x25kEfq72Z4eSDfON4ZG01',
+    description:
+      'For extended academic, dissertation, research, project mentoring or ongoing support involving multiple review stages.',
+    note: 'Best for larger support plans.',
   },
 ];
 
@@ -1670,6 +1714,95 @@ Thank you.`;
                 </p>
               </form>
             </FadeIn>
+          </div>
+        </section>
+
+        <section id="payments" className="bg-slate-50 py-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <SectionHeader
+              eyebrow="Secure Payments"
+              title="Pay securely after your support request is confirmed"
+              text="SmartBrain uses secure Stripe payment links for selected services and deposits. For custom, urgent, dissertation, research or project support, please submit a booking request first so the scope and price can be confirmed before payment."
+            />
+
+            <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {paymentLinks.map((payment) => (
+                <Card
+                  key={payment.name}
+                  className="border-slate-200 bg-white transition hover:-translate-y-1 hover:shadow-xl"
+                >
+                  <div className="p-6">
+                    <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#061B3A] text-amber-400">
+                      <CreditCard className="h-6 w-6" />
+                    </div>
+
+                    <h3 className="text-xl font-black text-[#061B3A]">
+                      {payment.name}
+                    </h3>
+
+                    <p className="mt-3 text-4xl font-black text-amber-600">
+                      {payment.price}
+                    </p>
+
+                    <p className="mt-4 leading-7 text-slate-600">
+                      {payment.description}
+                    </p>
+
+                    <div className="mt-5 rounded-2xl bg-amber-50 p-4 text-sm font-bold leading-6 text-[#061B3A] ring-1 ring-amber-100">
+                      {payment.note}
+                    </div>
+
+                    <a
+                      href={payment.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-[#061B3A] px-6 py-3 text-sm font-black text-white shadow-lg shadow-slate-900/15 transition hover:-translate-y-0.5 hover:bg-[#082B5F]"
+                    >
+                      Pay Securely <ArrowRight className="ml-2 h-4 w-4" />
+                    </a>
+                  </div>
+                </Card>
+              ))}
+            </div>
+
+            <div className="mt-10 rounded-[2rem] bg-[#061B3A] p-7 text-white shadow-xl">
+              <div className="grid gap-6 lg:grid-cols-3">
+                <div>
+                  <p className="text-sm font-black uppercase tracking-[0.25em] text-amber-300">
+                    Payment Guidance
+                  </p>
+                  <h3 className="mt-3 text-2xl font-black">
+                    Please pay only after confirmation.
+                  </h3>
+                </div>
+
+                <div className="lg:col-span-2">
+                  <p className="leading-8 text-slate-200">
+                    For fixed services, clients may use the secure payment links after
+                    confirming the service required. For custom, urgent, dissertation,
+                    research, project mentoring or extended support, please submit a booking
+                    request first. SmartBrain will review the request, confirm the scope,
+                    agree the price and then advise which payment link to use.
+                  </p>
+
+                  <div className="mt-5 grid gap-3 sm:grid-cols-3">
+                    {[
+                      'Secure Stripe checkout',
+                      'Card payment supported',
+                      'Scope confirmed first',
+                    ].map((item) => (
+                      <div
+                        key={item}
+                        className="flex items-center gap-2 rounded-2xl bg-white/10 p-4 text-sm font-bold text-slate-100 ring-1 ring-white/10"
+                      >
+                        <CheckCircle2 className="h-4 w-4 shrink-0 text-amber-300" />
+                        {item}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
