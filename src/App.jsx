@@ -67,15 +67,54 @@ const academicLevelOptions = [
   'Other',
 ];
 
+const paymentLinks = [
+  {
+    name: 'Starter Review',
+    price: '£25',
+    description:
+      'For short documents, proofreading, formatting checks and quick academic or professional review.',
+    url: 'https://buy.stripe.com/3cI4gAgub9nseSDbyx4ZG05',
+  },
+  {
+    name: 'Academic Support Deposit',
+    price: '£60',
+    description:
+      'For assignment support, coursework improvement, referencing guidance and presentation/report review.',
+    url: 'https://buy.stripe.com/fZu00k2DldDIfWHfON4ZG04',
+    featured: true,
+  },
+  {
+    name: 'Application Support',
+    price: '£40',
+    description:
+      'For school applications, personal statements, academic CVs and document checklist preparation.',
+    url: 'https://buy.stripe.com/fZu6oI0vdarwaCn7ih4ZG03',
+  },
+  {
+    name: 'Custom Support Deposit',
+    price: '£50',
+    description:
+      'For custom academic, research, project, data, editing, presentation or document support after consultation.',
+    url: 'https://buy.stripe.com/6oU28sa5N7fkaCn8ml4ZG02',
+  },
+  {
+    name: 'Premium Support Deposit',
+    price: '£100',
+    description:
+      'For extended academic, research, dissertation, project mentoring or application support arrangements.',
+    url: 'https://buy.stripe.com/8x25kEfq72Z4eSDfON4ZG01',
+  },
+];
+
 const navLinks = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
   { label: 'Packages', href: '#packages' },
-  { label: 'Process', href: '#process' },
   { label: 'Payments', href: '#payments' },
-  { label: 'Resources', href: '#resources' },
+  { label: 'Process', href: '#process' },
   { label: 'FAQ', href: '#faq' },
+  { label: 'Policies', href: '#policies' },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -405,49 +444,6 @@ const packages = [
   },
 ];
 
-const paymentLinks = [
-  {
-    name: 'Starter Review',
-    price: '£25',
-    link: 'https://buy.stripe.com/3cI4gAgub9nseSDbyx4ZG05',
-    description:
-      'For short documents, proofreading, formatting checks, CVs, personal statements, presentation slides and small report sections.',
-    note: 'Best for quick review tasks.',
-  },
-  {
-    name: 'Academic Support Deposit',
-    price: '£60',
-    link: 'https://buy.stripe.com/fZu00k2DldDIfWHfON4ZG04',
-    description:
-      'For assignment structure guidance, coursework improvement advice, referencing support and academic coaching.',
-    note: 'Pay after support scope is agreed.',
-  },
-  {
-    name: 'Application Support',
-    price: '£40',
-    link: 'https://buy.stripe.com/fZu6oI0vdarwaCn7ih4ZG03',
-    description:
-      'For school, college, university or professional programme application support, including personal statement and CV review.',
-    note: 'Best for application preparation.',
-  },
-  {
-    name: 'Custom Support Deposit',
-    price: '£50',
-    link: 'https://buy.stripe.com/6oU28sa5N7fkaCn8ml4ZG02',
-    description:
-      'For custom academic, research, project, data, editing, presentation or application support after consultation.',
-    note: 'Use only after quote confirmation.',
-  },
-  {
-    name: 'Premium Support Deposit',
-    price: '£100',
-    link: 'https://buy.stripe.com/8x25kEfq72Z4eSDfON4ZG01',
-    description:
-      'For extended academic, dissertation, research, project mentoring or ongoing support involving multiple review stages.',
-    note: 'Best for larger support plans.',
-  },
-];
-
 const process = [
   {
     title: 'Submit Request',
@@ -555,63 +551,102 @@ const faqs = [
 
 const policies = [
   {
-    icon: <Scale className="h-5 w-5" />,
-    title: 'Academic Integrity',
-    text: 'SmartBrain provides coaching, feedback, proofreading, research guidance, data analysis support and learning development services. We do not write, complete or submit assessed work on behalf of students.',
+    icon: <CreditCard className="h-5 w-5" />,
+    title: 'Payment & Refund Policy',
+    text:
+      'SmartBrain uses secure payment links for fixed services, deposits and custom support. Larger, urgent, dissertation, research or project work should normally be reviewed first before payment is requested.',
     details: [
-      'Clients remain responsible for their own learning and final submission.',
-      'Support is designed to improve understanding, structure and presentation.',
-      'We do not encourage plagiarism, contract cheating or misrepresentation.',
+      'Payments may be made through secure Stripe payment links provided by SmartBrain.',
+      'Fixed services, deposits and custom payment links may be used depending on the service type, urgency and complexity.',
+      'For custom, urgent, dissertation, research or project support, clients should submit a booking request first so the scope, deadline and price can be confirmed.',
+      'Work normally begins only after the agreed scope has been confirmed and the required payment or deposit has been received.',
+      'Clients may request cancellation before work starts. Where no work has been completed, no time has been reserved and no administrative preparation has been carried out, a full refund may be considered.',
+      'Where work has started, a refund may be reduced to reflect preparation time, consultation, document review, reserved time or support already delivered.',
+      'Completed services are generally non-refundable unless SmartBrain has failed to deliver the agreed support.',
+      'SmartBrain does not refund payments because a client later changes their mind after receiving support, misses a deadline, does not use the guidance provided, or does not achieve a particular grade, admission, visa, job or third-party outcome.',
+      'Refund requests should be sent to smartbrainconsultancyuk@gmail.com with the client name, payment date, service paid for and reason for the request.',
     ],
   },
   {
     icon: <Lock className="h-5 w-5" />,
-    title: 'Privacy & Confidentiality',
-    text: 'Client information is treated confidentially and used only to understand and deliver the requested support.',
+    title: 'Privacy Policy',
+    text:
+      'SmartBrain respects client privacy and collects only the information needed to respond to enquiries, manage bookings, provide support, process payments and maintain business records.',
     details: [
-      'Clients should not share passwords, bank details or unnecessary sensitive information.',
-      'Documents are used only for the purpose of providing the requested support.',
-      'Confidentiality is part of SmartBrain’s professional service standard.',
+      'SmartBrain may collect full name, email address, phone or WhatsApp number, country or location, service requested, academic level or purpose, deadline, budget range, preferred contact method, message details and consent confirmation.',
+      'Booking form submissions are stored through Netlify Forms and may also be sent to the SmartBrain email inbox for notification and administration.',
+      'Payments are processed securely through Stripe. SmartBrain does not directly store full card details on the website.',
+      'SmartBrain may receive payment confirmation information such as payer name, email address, payment amount, payment status and service purchased.',
+      'Client information may be used to respond to enquiries, confirm scope and pricing, provide support, process payments, maintain records and protect the business from misuse or disputes.',
+      'SmartBrain does not sell client personal data to third parties.',
+      'Limited information may be processed through trusted service providers such as Netlify, Stripe, email services, WhatsApp or professional advisers where necessary.',
+      'Clients should not submit passwords, bank details, private login details or unnecessary sensitive information through the booking form, email or WhatsApp.',
+      'Privacy-related requests can be sent to smartbrainconsultancyuk@gmail.com.',
+    ],
+  },
+  {
+    icon: <FileCheck2 className="h-5 w-5" />,
+    title: 'Terms of Service',
+    text:
+      'These terms explain how SmartBrain provides academic, research, project, editing, data, presentation, application and document preparation support.',
+    details: [
+      'Submitting a booking request does not automatically mean the service has been accepted. SmartBrain may first review the request and confirm scope, price, deadline and service boundaries.',
+      'Clients must provide accurate contact details, clear instructions, relevant documents, correct deadlines and any marking criteria or requirements where applicable.',
+      'SmartBrain may refuse or stop a request that appears unethical, unlawful, abusive, misleading or outside the service scope.',
+      'SmartBrain does not guarantee academic grades, dissertation marks, admission, scholarship approval, visa approval, job outcomes, project assessment outcomes or third-party decisions.',
+      'Prices may depend on document length, urgency, complexity, academic level, number of review stages, project type and turnaround time.',
+      'Reasonable revisions may be provided where they fall within the original agreed scope.',
+      'Revisions do not include completely new tasks, new documents, major instruction changes or work outside the agreed service.',
+      'Clients are responsible for reviewing final documents, checking institutional rules, submitting their own work and using SmartBrain’s support ethically.',
+      'SmartBrain may use third-party platforms such as Netlify, Stripe, email services, WhatsApp and website hosting tools.',
+    ],
+  },
+  {
+    icon: <Scale className="h-5 w-5" />,
+    title: 'Academic Integrity Policy',
+    text:
+      'SmartBrain supports learning, planning, review, editing, preparation and confidence-building. It does not replace the client’s own work, learning or final responsibility.',
+    details: [
+      'SmartBrain can help with assignment brief explanation, marking criteria interpretation, structure guidance, proofreading, editing, research planning, methodology support, literature review organisation, referencing guidance, data interpretation, presentation preparation and application document review.',
+      'SmartBrain does not write assignments for students.',
+      'SmartBrain does not complete assessed work on behalf of students.',
+      'SmartBrain does not submit work to a university, college, school, employer or institution.',
+      'SmartBrain does not pretend to be the student or applicant.',
+      'SmartBrain does not support plagiarism, contract cheating, false information, fake references, misrepresentation or academic dishonesty.',
+      'Clients remain responsible for producing, understanding, reviewing and submitting their own work.',
+      'For dissertations and research projects, clients remain responsible for conducting their research, understanding their methodology, selecting data appropriately and interpreting findings honestly.',
+      'For IT, software, business, engineering, data or technical projects, clients must understand and be able to explain their own project.',
+    ],
+  },
+  {
+    icon: <UserCheck className="h-5 w-5" />,
+    title: 'Client Consent & Booking Disclaimer',
+    text:
+      'Before submitting a booking request, clients confirm that they understand SmartBrain’s service boundaries, responsibilities and communication process.',
+    details: [
+      'Clients understand that SmartBrain provides academic guidance, document support, project mentoring, editing, research support, application support and administrative assistance only.',
+      'Clients remain responsible for their own academic work, application documents, project materials and professional documents.',
+      'Clients understand that SmartBrain does not complete assessed work for students or provide regulated immigration advice.',
+      'Clients agree not to use SmartBrain’s support for plagiarism, contract cheating, false representation, academic dishonesty or any action that breaches institutional rules.',
+      'Clients understand that SmartBrain does not guarantee grades, admission, scholarship approval, visa outcomes, job outcomes, project marks or third-party decisions.',
+      'Clients agree not to submit passwords, bank details, private login information or unnecessary sensitive information through the booking form, email or WhatsApp.',
+      'Clients understand that larger, urgent, dissertation, research or project-related work may require a custom quote before payment.',
+      'Clients agree that SmartBrain may contact them by email, phone call or WhatsApp to respond to enquiries, confirm requests, discuss pricing, arrange payment or deliver support.',
     ],
   },
   {
     icon: <Plane className="h-5 w-5" />,
     title: 'Student Visa Service Boundary',
-    text: 'SmartBrain is not a regulated immigration advice provider. We provide general information, education application support and administrative document preparation only.',
+    text:
+      'SmartBrain may support general document organisation and administrative preparation, but it does not provide regulated immigration advice.',
     details: [
-      'We do not provide legal advice or immigration representation.',
-      'We do not assess visa eligibility or guarantee visa outcomes.',
-      'Clients should confirm official requirements through authorised sources or qualified immigration advisers.',
-    ],
-  },
-  {
-    icon: <CreditCard className="h-5 w-5" />,
-    title: 'Payment Terms',
-    text: 'Prices are confirmed after consultation. Complex, urgent or extended tasks may require custom quotes and deposits.',
-    details: [
-      'Final pricing depends on document length, urgency, complexity and support level.',
-      'A deposit may be required for larger or urgent work.',
-      'Any extra work outside the agreed scope may require a revised quote.',
-    ],
-  },
-  {
-    icon: <FileCheck2 className="h-5 w-5" />,
-    title: 'Revision Policy',
-    text: 'Reasonable revisions are linked to the agreed scope of work. Major changes may require a new quote.',
-    details: [
-      'Minor clarification or correction requests can be considered within the agreed support scope.',
-      'New sections, new documents or major changes may be treated as a new task.',
-      'Clients are encouraged to review feedback carefully and ask questions early.',
-    ],
-  },
-  {
-    icon: <UserCheck className="h-5 w-5" />,
-    title: 'Client Responsibility',
-    text: 'Clients remain responsible for producing, understanding, reviewing and submitting their own academic work and application documents.',
-    details: [
-      'Clients should read and understand all guidance provided.',
-      'Clients must check their institution, employer or application requirements before submission.',
-      'SmartBrain supports preparation and improvement but does not guarantee external decisions.',
+      'SmartBrain may help clients organise documents and understand general publicly available preparation information.',
+      'SmartBrain does not provide legal immigration advice.',
+      'SmartBrain does not assess visa eligibility.',
+      'SmartBrain does not represent clients in immigration matters.',
+      'SmartBrain does not complete regulated immigration advice work.',
+      'SmartBrain does not guarantee visa outcomes.',
+      'Clients who need immigration advice should contact an authorised immigration adviser, solicitor or official government source.',
     ],
   },
 ];
@@ -827,6 +862,7 @@ export default function SmartBrainPremiumWebsite() {
   const [openAbout, setOpenAbout] = useState(0);
   const [openService, setOpenService] = useState(0);
   const [openPackage, setOpenPackage] = useState(1);
+  const [openPayment, setOpenPayment] = useState(1);
   const [openPolicy, setOpenPolicy] = useState(null);
   const [openResource, setOpenResource] = useState(null);
   const [openProcess, setOpenProcess] = useState(null);
@@ -998,7 +1034,7 @@ Thank you.`;
             </div>
           </a>
 
-          <nav className="hidden items-center gap-5 text-sm font-bold text-slate-700 xl:flex">
+          <nav className="hidden items-center gap-4 text-sm font-bold text-slate-700 xl:flex">
             {navLinks.map((link) => (
               <a key={link.label} href={link.href} className="transition hover:text-amber-600">
                 {link.label}
@@ -1407,7 +1443,51 @@ Thank you.`;
           </div>
         </section>
 
-        <section id="process" className="bg-white py-16">
+        <section id="payments" className="bg-white py-16">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+            <SectionHeader
+              eyebrow="Secure Payments"
+              title="Pay securely after confirming your support needs"
+              text="For custom, urgent, dissertation, research or project support, please submit a booking request first. SmartBrain will confirm the scope, deadline and correct payment option before work begins."
+            />
+
+            <div className="mt-10 space-y-4">
+              {paymentLinks.map((payment, index) => (
+                <AccordionItem
+                  key={payment.name}
+                  title={`${payment.name} — ${payment.price}`}
+                  icon={<CreditCard className="h-5 w-5" />}
+                  badge={payment.featured ? 'Popular Payment Option' : undefined}
+                  isOpen={openPayment === index}
+                  onClick={() => setOpenPayment(openPayment === index ? null : index)}
+                >
+                  <p>{payment.description}</p>
+
+                  <div className="mt-5 rounded-2xl bg-amber-50 p-5 ring-1 ring-amber-100">
+                    <p className="font-bold text-[#061B3A]">Important payment notice</p>
+                    <p className="mt-2 text-slate-700">
+                      Payments are for academic coaching, review, guidance, editing,
+                      preparation and administrative support only. SmartBrain does not
+                      guarantee grades, admission, visa outcomes, job outcomes or third-party
+                      decisions.
+                    </p>
+                  </div>
+
+                  <a
+                    href={payment.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-6 inline-flex items-center justify-center rounded-full bg-[#061B3A] px-6 py-3 text-sm font-black text-white shadow-lg shadow-slate-900/15 transition hover:-translate-y-0.5 hover:bg-[#082B5F]"
+                  >
+                    Pay Securely <ArrowRight className="ml-2 h-4 w-4" />
+                  </a>
+                </AccordionItem>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="process" className="bg-slate-50 py-16">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <SectionHeader
               eyebrow="How It Works"
@@ -1670,9 +1750,12 @@ Thank you.`;
                       onChange={handleChange}
                       className="mt-1 h-4 w-4 accent-amber-500"
                     />
-                    I understand that SmartBrain provides academic guidance, document support
-                    and administrative assistance only. I agree not to submit passwords, bank
-                    details or unnecessary sensitive information through this form.
+                    I understand that SmartBrain provides academic guidance, document support,
+                    project mentoring, editing, research support, application support and
+                    administrative assistance only. I remain responsible for my own work,
+                    documents and submissions. I understand that SmartBrain does not complete
+                    assessed work for students, provide regulated immigration advice, or
+                    guarantee grades, admission, visa, job or third-party outcomes.
                   </label>
                 </div>
 
@@ -1714,95 +1797,6 @@ Thank you.`;
                 </p>
               </form>
             </FadeIn>
-          </div>
-        </section>
-
-        <section id="payments" className="bg-slate-50 py-16">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <SectionHeader
-              eyebrow="Secure Payments"
-              title="Pay securely after your support request is confirmed"
-              text="SmartBrain uses secure Stripe payment links for selected services and deposits. For custom, urgent, dissertation, research or project support, please submit a booking request first so the scope and price can be confirmed before payment."
-            />
-
-            <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {paymentLinks.map((payment) => (
-                <Card
-                  key={payment.name}
-                  className="border-slate-200 bg-white transition hover:-translate-y-1 hover:shadow-xl"
-                >
-                  <div className="p-6">
-                    <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#061B3A] text-amber-400">
-                      <CreditCard className="h-6 w-6" />
-                    </div>
-
-                    <h3 className="text-xl font-black text-[#061B3A]">
-                      {payment.name}
-                    </h3>
-
-                    <p className="mt-3 text-4xl font-black text-amber-600">
-                      {payment.price}
-                    </p>
-
-                    <p className="mt-4 leading-7 text-slate-600">
-                      {payment.description}
-                    </p>
-
-                    <div className="mt-5 rounded-2xl bg-amber-50 p-4 text-sm font-bold leading-6 text-[#061B3A] ring-1 ring-amber-100">
-                      {payment.note}
-                    </div>
-
-                    <a
-                      href={payment.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-[#061B3A] px-6 py-3 text-sm font-black text-white shadow-lg shadow-slate-900/15 transition hover:-translate-y-0.5 hover:bg-[#082B5F]"
-                    >
-                      Pay Securely <ArrowRight className="ml-2 h-4 w-4" />
-                    </a>
-                  </div>
-                </Card>
-              ))}
-            </div>
-
-            <div className="mt-10 rounded-[2rem] bg-[#061B3A] p-7 text-white shadow-xl">
-              <div className="grid gap-6 lg:grid-cols-3">
-                <div>
-                  <p className="text-sm font-black uppercase tracking-[0.25em] text-amber-300">
-                    Payment Guidance
-                  </p>
-                  <h3 className="mt-3 text-2xl font-black">
-                    Please pay only after confirmation.
-                  </h3>
-                </div>
-
-                <div className="lg:col-span-2">
-                  <p className="leading-8 text-slate-200">
-                    For fixed services, clients may use the secure payment links after
-                    confirming the service required. For custom, urgent, dissertation,
-                    research, project mentoring or extended support, please submit a booking
-                    request first. SmartBrain will review the request, confirm the scope,
-                    agree the price and then advise which payment link to use.
-                  </p>
-
-                  <div className="mt-5 grid gap-3 sm:grid-cols-3">
-                    {[
-                      'Secure Stripe checkout',
-                      'Card payment supported',
-                      'Scope confirmed first',
-                    ].map((item) => (
-                      <div
-                        key={item}
-                        className="flex items-center gap-2 rounded-2xl bg-white/10 p-4 text-sm font-bold text-slate-100 ring-1 ring-white/10"
-                      >
-                        <CheckCircle2 className="h-4 w-4 shrink-0 text-amber-300" />
-                        {item}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -1893,8 +1887,8 @@ Thank you.`;
           <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <SectionHeader
               eyebrow="Policies & Protection"
-              title="Clear service boundaries and client protection"
-              text="Click each policy area to understand how SmartBrain works professionally and ethically."
+              title="Clear policies for safe and professional support"
+              text="Click each policy area to understand SmartBrain’s payment terms, privacy approach, service boundaries, academic integrity rules and client responsibilities."
               light
             />
 
